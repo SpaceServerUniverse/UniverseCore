@@ -1,0 +1,4 @@
+name: UniverseCore
+version: '${project.version}'
+main: space.yurisi.universecore.UniverseCore
+api-version: '1.20'
