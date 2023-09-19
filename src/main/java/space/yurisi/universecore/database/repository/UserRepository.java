@@ -5,9 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.model.User;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class UserRepository {
     private final SessionFactory sessionFactory;
@@ -17,10 +15,9 @@ public class UserRepository {
     }
 
     public User createUser(Player player) {
-        String id = player.getUniqueId().toString();
+        String uuid = player.getUniqueId().toString();
         String name = player.getName();
-        String datetime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now(ZoneId.of("Asia/Tokyo")));
-        User user = new User(id, name, null, null, datetime, datetime);
+        User user = new User(null, uuid, name, null, null, new Date(), new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 
@@ -32,16 +29,17 @@ public class UserRepository {
         return user;
     }
 
-    public User getPlayerData(Player player) {
+    public User getUser(Player player) {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        User data = session.get(User.class, player.getUniqueId().toString());
+        User data = session.createSelectionQuery("from User where uuid = ?1", User.class)
+                .setParameter(1, player.getUniqueId().toString()).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
         return data;
     }
 
-    public void updatePlayerData(User user) {
+    public void updateUser(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.merge(user);//update
@@ -49,7 +47,7 @@ public class UserRepository {
         session.close();
     }
 
-    public void deletePlayerData(User user) {
+    public void deleteUser(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.remove(user); //delete

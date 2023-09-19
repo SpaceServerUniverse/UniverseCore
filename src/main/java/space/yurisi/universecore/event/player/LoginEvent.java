@@ -18,7 +18,7 @@ public class LoginEvent implements Listener {
     @EventHandler
     public void onLogin(PlayerLoginEvent event){
         Player player = event.getPlayer();
-        User data = this.userRepository.getPlayerData(player);
+        User data = this.userRepository.getUser(player);
         if (data == null) {
             this.userRepository.createUser(player);
         }

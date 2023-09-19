@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS users(
-    id VARCHAR(255) NOT NULL UNIQUE PRIMARY KEY," +
-    name VARCHAR(255) NOT NULL
-    uuid VARCHAR(255) NOT NULL UNIQUE
-    password VARCHAR(255)
-    remember_token VARCHAR(255)
-    created_at DATETIME NOT NULL
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    uuid VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255),
+    remember_token VARCHAR(255),
+    created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL
 )
