@@ -21,6 +21,7 @@ public final class UniverseCore extends JavaPlugin {
         this.sessionFactory = buildSessionFactory();
         this.userRepository = new UserRepository(getSessionFactory());
         new EventManager(this);
+        new UniverseCoreAPI(this);
     }
 
     @Override

@@ -7,6 +7,8 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import space.yurisi.universecore.database.repository.UserRepository;
 import space.yurisi.universecore.database.model.User;
 
+import java.util.Objects;
+
 public class LoginEvent implements Listener {
 
     private final UserRepository userRepository;
@@ -18,9 +20,16 @@ public class LoginEvent implements Listener {
     @EventHandler
     public void onLogin(PlayerLoginEvent event){
         Player player = event.getPlayer();
-        User data = this.userRepository.getUser(player);
-        if (data == null) {
+        String name = player.getName();
+        if (this.userRepository.getUser(player) == null) {
             this.userRepository.createUser(player);
+        }
+
+        User data = this.userRepository.getUser(player);
+
+        if(!Objects.equals(data.getName(), name)){
+            data.setName(name);
+            this.userRepository.updateUser(data);
         }
     }
 }
