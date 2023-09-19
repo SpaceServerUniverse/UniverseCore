@@ -1,4 +1,4 @@
-package space.yurisi.universecore.database.model;
+package space.yurisi.universecore.database.models;
 
 import java.util.Date;
 import java.util.UUID;

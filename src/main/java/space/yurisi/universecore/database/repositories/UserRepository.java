@@ -1,11 +1,12 @@
-package space.yurisi.universecore.database.repository;
+package space.yurisi.universecore.database.repositories;
 
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import space.yurisi.universecore.database.model.User;
+import space.yurisi.universecore.database.models.User;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class UserRepository {
     private final SessionFactory sessionFactory;
@@ -29,11 +30,20 @@ public class UserRepository {
         return user;
     }
 
-    public User getUser(Player player) {
+    public User getUser(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        User data = session.get(User.class, id);
+        session.getTransaction().commit();
+        session.close();
+        return data;
+    }
+
+    public User getUserFromUUID(UUID uuid){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         User data = session.createSelectionQuery("from User where uuid = ?1", User.class)
-                .setParameter(1, player.getUniqueId().toString()).getSingleResultOrNull();
+                .setParameter(1, uuid.toString()).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
         return data;

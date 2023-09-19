@@ -2,6 +2,7 @@ package space.yurisi.universecore.event;
 
 import org.bukkit.Bukkit;
 import space.yurisi.universecore.UniverseCore;
+import space.yurisi.universecore.UniverseCoreAPI;
 import space.yurisi.universecore.event.player.LoginEvent;
 
 public class EventManager {
@@ -10,6 +11,6 @@ public class EventManager {
     }
 
     private void init(UniverseCore main){
-        Bukkit.getPluginManager().registerEvents(new LoginEvent(main.getUserRepository()), main);
+        Bukkit.getPluginManager().registerEvents(new LoginEvent(UniverseCoreAPI.api().getUserRepository()), main);
     }
 }

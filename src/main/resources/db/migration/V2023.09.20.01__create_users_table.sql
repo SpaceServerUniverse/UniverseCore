@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS SpaceServerUniverse CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+use SpaceServerUniverse;
+
 CREATE TABLE IF NOT EXISTS users(
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     uuid VARCHAR(255) NOT NULL UNIQUE,
@@ -6,4 +10,4 @@ CREATE TABLE IF NOT EXISTS users(
     remember_token VARCHAR(255),
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL
-)
+);
