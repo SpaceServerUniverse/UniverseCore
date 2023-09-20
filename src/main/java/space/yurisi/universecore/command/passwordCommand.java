@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import space.yurisi.universecore.UniverseCoreAPI;
 import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.database.repositories.UserRepository;
+import space.yurisi.universecore.expection.UserNotFoundException;
 
 import java.util.regex.Pattern;
 
@@ -17,24 +18,28 @@ public class passwordCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(commandSender instanceof Player)){
+        if(!(commandSender instanceof Player player)){
             return false;
         }
-
-        Player player = (Player) commandSender;
 
         if (strings.length == 0){
             commandSender.sendMessage(Component.text("Usage: /password <password 大文字小文字数字含む8~36文字>"));
             return false;
         }
 
-        UserRepository userRepo = UniverseCoreAPI.api().getDatabaseManager().getUserRepository();
+        UserRepository userRepo = UniverseCoreAPI.getInstance().getDatabaseManager().getUserRepository();
 
         if(!userRepo.existsUserFromUUID(player.getUniqueId())){
             userRepo.createUser(player);
         }
-
-        User user = userRepo.getUserFromUUID(player.getUniqueId());
+        User user;
+        try {
+            user = userRepo.getUserFromUUID(player.getUniqueId());
+        } catch (UserNotFoundException e){
+            e.printStackTrace();
+            commandSender.sendMessage(Component.text("エラーが発生しました エラーコード:U0001"));
+            return false;
+        }
 
         //大文字小文字数字含む8~32文字
         //記号も可

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Money;
 import space.yurisi.universecore.database.models.User;
+import space.yurisi.universecore.expection.MoneyNotFoundException;
 
 import java.util.Date;
 
@@ -42,15 +43,19 @@ public class MoneyRepository {
     /**
      * お金をプライマリーキーから取得します。
      * 存在しない場合はnullを返します。
+     *
      * @param id Long(PrimaryKey)
      * @return Money | null
      */
-    public Money getMoney(Long id) {
+    public Money getMoney(Long id) throws MoneyNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         Money data = session.get(Money.class, id);
         session.getTransaction().commit();
         session.close();
+        if (data == null) {
+            throw new MoneyNotFoundException("お金データが存在しませんでした。 ID:" + id);
+        }
         return data;
     }
 
@@ -61,34 +66,47 @@ public class MoneyRepository {
      * @param user_id Long
      * @return Money | null
      */
-    public Money getMoneyFromUserId(Long user_id){
+    public Money getMoneyFromUserId(Long user_id) throws MoneyNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         Money data = session.createSelectionQuery("from Money where user_id = ?1", Money.class)
                 .setParameter(1, user_id).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
+        if (data == null) {
+            throw new MoneyNotFoundException("お金データが存在しませんでした。 user_id:" + user_id);
+        }
         return data;
     }
 
     /**
      * 指定したプライマリーキーがデータベースに存在するかを返します
+     *
      * @param id Long(Primary key)
      * @return boolean
      */
-    public boolean existsMoney(Long id){
-        Money money = getMoney(id);
-        return money != null;
+    public boolean existsMoney(Long id) {
+        try{
+            getMoney(id);
+            return true;
+        }catch (MoneyNotFoundException e){
+            return false;
+        }
     }
 
     /**
      * 指定したユーザーIDのカラムがデータベースに存在するかを返します
+     *
      * @param user_id Long
      * @return boolean
      */
-    public boolean existsMoneyFromUserId(Long user_id){
-        Money money = getMoneyFromUserId(user_id);
-        return money != null;
+    public boolean existsMoneyFromUserId(Long user_id) {
+        try {
+            getMoneyFromUserId(user_id);
+            return true;
+        } catch (MoneyNotFoundException e){
+            return false;
+        }
     }
 
     /**
@@ -98,11 +116,8 @@ public class MoneyRepository {
      * @param user_id Long
      * @return Long(PrimaryKey) long
      */
-    public Long getPrimaryKeyFromUserId(Long user_id){
+    public Long getPrimaryKeyFromUserId(Long user_id) throws MoneyNotFoundException {
         Money money = this.getMoneyFromUserId(user_id);
-        if(money == null){
-            return null;
-        }
         return money.getId();
     }
 
