@@ -2,12 +2,14 @@ package space.yurisi.universecore.event.player;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import space.yurisi.universecore.database.repositories.UserRepository;
 import space.yurisi.universecore.database.models.User;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class LoginEvent implements Listener {
 
@@ -17,15 +19,16 @@ public class LoginEvent implements Listener {
         this.userRepository = userRepository;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(PlayerLoginEvent event){
         Player player = event.getPlayer();
         String name = player.getName();
-        if (this.userRepository.getUserFromUUID(player.getUniqueId()) == null) {
+        UUID uuid = player.getUniqueId();
+        if (!this.userRepository.existsUserFromUUID(uuid)) {
             this.userRepository.createUser(player);
         }
 
-        User data = this.userRepository.getUserFromUUID(player.getUniqueId());
+        User data = this.userRepository.getUserFromUUID(uuid);
 
         if(!Objects.equals(data.getName(), name)){
             data.setName(name);

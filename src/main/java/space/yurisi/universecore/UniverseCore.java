@@ -1,6 +1,8 @@
 package space.yurisi.universecore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import space.yurisi.universecore.command.CommandManager;
 import space.yurisi.universecore.database.DatabaseConnector;
 
 import space.yurisi.universecore.event.EventManager;
@@ -22,6 +24,7 @@ public final class UniverseCore extends JavaPlugin {
         );
         new UniverseCoreAPI(this.connector);
         new EventManager(this);
+        new CommandManager(this);
     }
 
     @Override

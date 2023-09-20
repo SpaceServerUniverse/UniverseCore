@@ -11,6 +11,6 @@ public class EventManager {
     }
 
     private void init(UniverseCore main){
-        Bukkit.getPluginManager().registerEvents(new LoginEvent(UniverseCoreAPI.api().getUserRepository()), main);
+        Bukkit.getPluginManager().registerEvents(new LoginEvent(UniverseCoreAPI.api().getDatabaseManager().getUserRepository()), main);
     }
 }
