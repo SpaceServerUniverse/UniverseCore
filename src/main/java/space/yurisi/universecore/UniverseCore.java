@@ -13,6 +13,8 @@ public final class UniverseCore extends JavaPlugin {
     private DatabaseConnector connector;
     private Config config;
 
+    private UniverseCoreAPI api;
+
     @Override
     public void onEnable() {
         this.config = new Config(this);
@@ -22,7 +24,7 @@ public final class UniverseCore extends JavaPlugin {
                 getPluginConfig().getDBUserName(),
                 getPluginConfig().getDBUserPassword()
         );
-        new UniverseCoreAPI(this.connector);
+        this.api = new UniverseCoreAPI(this.connector);
         new EventManager(this);
         new CommandManager(this);
     }
@@ -30,6 +32,10 @@ public final class UniverseCore extends JavaPlugin {
     @Override
     public void onDisable() {
         connector.close();
+    }
+
+    public UniverseCoreAPI getApi(){
+        return this.api;
     }
 
     public Config getPluginConfig() {
