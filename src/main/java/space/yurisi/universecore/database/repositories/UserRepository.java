@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.User;
+import space.yurisi.universecore.expection.UserNotFoundException;
 
 import java.util.Date;
 import java.util.UUID;
@@ -51,15 +52,19 @@ public class UserRepository {
     /**
      * プレイヤーをプライマリーキーから取得します。
      * 存在しない場合はnullを返します。
+     *
      * @param id Long(PrimaryKey)
      * @return User | null
      */
-    public User getUser(Long id) {
+    public User getUser(Long id) throws UserNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         User data = session.get(User.class, id);
         session.getTransaction().commit();
         session.close();
+        if (data == null) {
+            throw new UserNotFoundException("ユーザーデータが存在しませんでした。 ID:" + id);
+        }
         return data;
     }
 
@@ -70,34 +75,47 @@ public class UserRepository {
      * @param uuid UUID
      * @return User | null
      */
-    public User getUserFromUUID(UUID uuid){
+    public User getUserFromUUID(UUID uuid) throws UserNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         User data = session.createSelectionQuery("from User where uuid = ?1", User.class)
                 .setParameter(1, uuid.toString()).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
+        if (data == null) {
+            throw new UserNotFoundException("ユーザーデータが存在しませんでした。 UUID:" + uuid);
+        }
         return data;
     }
 
     /**
      * 指定したプライマリーキーがデータベースに存在するかを返します
+     *
      * @param id Long(Primary key)
      * @return boolean
      */
-    public boolean existsUser(Long id){
-        User user = getUser(id);
-        return user != null;
+    public boolean existsUser(Long id) {
+        try {
+            getUser(id);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
     }
 
     /**
      * 指定したUUIDがデータベースに存在するかを返します
+     *
      * @param uuid UUID
      * @return boolean
      */
-    public boolean existsUserFromUUID(UUID uuid){
-        User user = getUserFromUUID(uuid);
-        return user != null;
+    public boolean existsUserFromUUID(UUID uuid) {
+        try {
+            getUserFromUUID(uuid);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
     }
 
     /**
@@ -107,12 +125,13 @@ public class UserRepository {
      * @param uuid UUID
      * @return Long(PrimaryKey) long
      */
-    public Long getPrimaryKeyFromUUID(UUID uuid){
-        User user = this.getUserFromUUID(uuid);
-        if(user == null){
+    public Long getPrimaryKeyFromUUID(UUID uuid) {
+        try {
+            User user = this.getUserFromUUID(uuid);
+            return user.getId();
+        } catch (UserNotFoundException e) {
             return null;
         }
-        return user.getId();
     }
 
     /**
