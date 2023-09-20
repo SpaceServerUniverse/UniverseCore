@@ -45,7 +45,6 @@ public class User {
             Date created_at,
             Date updated_at
     ) {
-        Bukkit.getLogger().info(uuid);
         this.id = id;
         this.uuid = uuid;
         this.name = name;
