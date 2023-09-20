@@ -125,13 +125,9 @@ public class UserRepository {
      * @param uuid UUID
      * @return Long(PrimaryKey) long
      */
-    public Long getPrimaryKeyFromUUID(UUID uuid) {
-        try {
-            User user = this.getUserFromUUID(uuid);
-            return user.getId();
-        } catch (UserNotFoundException e) {
-            return null;
-        }
+    public Long getPrimaryKeyFromUUID(UUID uuid) throws UserNotFoundException {
+        User user = this.getUserFromUUID(uuid);
+        return user.getId();
     }
 
     /**

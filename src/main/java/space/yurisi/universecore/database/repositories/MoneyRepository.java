@@ -116,13 +116,9 @@ public class MoneyRepository {
      * @param user_id Long
      * @return Long(PrimaryKey) long
      */
-    public Long getPrimaryKeyFromUserId(Long user_id) {
-        try{
-            Money money = this.getMoneyFromUserId(user_id);
-            return money.getId();
-        } catch (MoneyNotFoundException e){
-            return null;
-        }
+    public Long getPrimaryKeyFromUserId(Long user_id) throws MoneyNotFoundException {
+        Money money = this.getMoneyFromUserId(user_id);
+        return money.getId();
     }
 
     /**
