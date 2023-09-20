@@ -13,8 +13,6 @@ public class UniverseCoreAPI {
 
     private final SessionFactory sessionFactory;
 
-
-
     public UniverseCoreAPI(DatabaseConnector connector){
         this.connector = connector;
         this.sessionFactory = connector.getSessionFactory();
@@ -26,7 +24,7 @@ public class UniverseCoreAPI {
         return this.manager;
     }
 
-    public static UniverseCoreAPI api(){
+    public static UniverseCoreAPI getInstance(){
         return api;
     }
 }

@@ -34,10 +34,6 @@ public final class UniverseCore extends JavaPlugin {
         connector.close();
     }
 
-    public UniverseCoreAPI getApi(){
-        return this.api;
-    }
-
     public Config getPluginConfig() {
         return this.config;
     }

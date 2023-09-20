@@ -27,7 +27,7 @@ public class passwordCommand implements CommandExecutor {
             return false;
         }
 
-        UserRepository userRepo = UniverseCoreAPI.api().getDatabaseManager().getUserRepository();
+        UserRepository userRepo = UniverseCoreAPI.getInstance().getDatabaseManager().getUserRepository();
 
         if(!userRepo.existsUserFromUUID(player.getUniqueId())){
             userRepo.createUser(player);
