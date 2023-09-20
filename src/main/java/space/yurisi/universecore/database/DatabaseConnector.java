@@ -7,8 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import space.yurisi.universecore.database.models.User;
 
-import static org.hibernate.cfg.JdbcSettings.*;
-import static org.hibernate.cfg.JdbcSettings.JDBC_TIME_ZONE;
+import static org.hibernate.cfg.AvailableSettings.*;
 
 public class DatabaseConnector {
 

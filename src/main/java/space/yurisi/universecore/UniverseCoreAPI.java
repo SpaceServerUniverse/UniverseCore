@@ -3,7 +3,6 @@ package space.yurisi.universecore;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.DatabaseConnector;
 import space.yurisi.universecore.database.DatabaseManager;
-import space.yurisi.universecore.database.repositories.UserRepository;
 
 public class UniverseCoreAPI {
     private static UniverseCoreAPI api;
