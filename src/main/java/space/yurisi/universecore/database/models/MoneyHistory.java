@@ -1,7 +1,6 @@
 package space.yurisi.universecore.database.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,17 +14,16 @@ public class MoneyHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", unique = true, columnDefinition = "BIGINT UNSIGNED")
+    @Column(name = "user_id", columnDefinition = "BIGINT UNSIGNED")
     private Long user_id;
 
     @Column(name = "money_change")
     private Long money_change;
 
     @Column(name = "money")
-    @ColumnDefault("1000")
     private Long money;
 
-    @Column(name = "string")
+    @Column(name = "reason")
     private String reason;
 
     @CreationTimestamp

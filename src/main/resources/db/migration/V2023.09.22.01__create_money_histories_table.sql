@@ -1,4 +1,4 @@
-use SpaceServerUniverse
+use SpaceServerUniverse;
 
 CREATE TABLE IF NOT EXISTS money_histories(
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,

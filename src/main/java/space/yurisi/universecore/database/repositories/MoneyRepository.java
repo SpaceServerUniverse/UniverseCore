@@ -41,7 +41,7 @@ public class MoneyRepository {
         session.getTransaction().commit();
         session.close();
 
-        this.moneyHistoryRepository.createMoneyHistory(user_id, 1000L, "お金データの作成");
+        this.moneyHistoryRepository.createMoneyHistory(money, 1000L, "お金データの作成");
 
         return money;
     }
@@ -140,7 +140,7 @@ public class MoneyRepository {
         session.beginTransaction();
         session.merge(money);//update
         session.getTransaction().commit();
-        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        this.moneyHistoryRepository.createMoneyHistory(money, money_change, reason);
         session.close();
     }
 
@@ -156,7 +156,7 @@ public class MoneyRepository {
         session.beginTransaction();
         session.merge(money);//update
         session.getTransaction().commit();
-        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        this.moneyHistoryRepository.createMoneyHistory(money, money_change, reason);
         session.close();
     }
 
@@ -171,7 +171,7 @@ public class MoneyRepository {
         session.beginTransaction();
         session.merge(money);//update
         session.getTransaction().commit();
-        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        this.moneyHistoryRepository.createMoneyHistory(money, money_change, reason);
         session.close();
     }
 
@@ -187,7 +187,7 @@ public class MoneyRepository {
         session.beginTransaction();
         session.merge(money);//update
         session.getTransaction().commit();
-        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        this.moneyHistoryRepository.createMoneyHistory(money, money_change, reason);
         session.close();
     }
 
