@@ -19,14 +19,26 @@ public class DatabaseManager {
         this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
     }
 
+    /**
+     * ユーザーリポジトリを取得
+     * @return UserRepository
+     */
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
+    /**
+     * お金リポジトリの取得
+     * @return MoneyRepository
+     */
     public MoneyRepository getMoneyRepository() {
         return moneyRepository;
     }
 
+    /**
+     * お金履歴リポジトリを取得
+     * @return MoneyHistoryRepository
+     */
     public MoneyHistoryRepository getMoneyHistoryRepository() {
         return moneyHistoryRepository;
     }

@@ -1,12 +1,11 @@
 package space.yurisi.universecore.database.models;
 
-import java.util.Date;
-import java.util.UUID;
-
 import jakarta.persistence.*;
-import org.bukkit.Bukkit;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")

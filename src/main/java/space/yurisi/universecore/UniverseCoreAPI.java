@@ -20,10 +20,19 @@ public class UniverseCoreAPI {
         api = this;
     }
 
+    /**
+     * データベースマネージャーの取得
+     *
+     * @return manager データベースマネージャー
+     */
     public DatabaseManager getDatabaseManager(){
         return this.manager;
     }
 
+    /**
+     * 自身のインスタンスを取得
+     * @return api UniverseCoreAPI
+     */
     public static UniverseCoreAPI getInstance(){
         return api;
     }

@@ -3,7 +3,6 @@ package space.yurisi.universecore.database.repositories;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.MoneyHistory;
-import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.expection.MoneyHistoryNotFoundException;
 import space.yurisi.universecore.expection.MoneyNotFoundException;
 
