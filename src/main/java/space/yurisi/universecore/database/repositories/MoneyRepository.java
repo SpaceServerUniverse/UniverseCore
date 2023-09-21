@@ -11,14 +11,17 @@ import java.util.Date;
 public class MoneyRepository {
 
     private final SessionFactory sessionFactory;
+    private final MoneyHistoryRepository moneyHistoryRepository;
 
     /**
      * Instantiates a new Money repository.
      *
      * @param sessionFactory session factory
+     * @param moneyHistoryRepository MoneyHistoryRepository
      */
-    public MoneyRepository(SessionFactory sessionFactory) {
+    public MoneyRepository(SessionFactory sessionFactory, MoneyHistoryRepository moneyHistoryRepository) {
         this.sessionFactory = sessionFactory;
+        this.moneyHistoryRepository = moneyHistoryRepository;
     }
 
     /**
@@ -28,7 +31,8 @@ public class MoneyRepository {
      * @return money Money
      */
     public Money createMoney(User user) {
-        Money money = new Money(null, user.getId(), 1000L, new Date(), new Date());
+        Long user_id = user.getId();
+        Money money = new Money(null, user_id, 1000L, new Date(), new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 
@@ -36,6 +40,8 @@ public class MoneyRepository {
         session.persist(money);//save
         session.getTransaction().commit();
         session.close();
+
+        this.moneyHistoryRepository.createMoneyHistory(user_id, 1000L, "お金データの作成");
 
         return money;
     }
@@ -121,16 +127,52 @@ public class MoneyRepository {
         return money.getId();
     }
 
+
     /**
      * お金モデルに基づきデータをアップデートします。
      *
      * @param money Money
      */
     public void updateMoney(Money money) {
+        Long money_change = 0L;
+        String reason = "";
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.merge(money);//update
         session.getTransaction().commit();
+        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        session.close();
+    }
+
+    /**
+     * お金モデルに基づきデータをアップデートします。
+     *
+     * @param money Money
+     * @param reason 理由
+     */
+    public void updateMoney(Money money, String reason) {
+        Long money_change = 0L;
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.merge(money);//update
+        session.getTransaction().commit();
+        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        session.close();
+    }
+
+    /**
+     * お金モデルに基づきデータをアップデートします。
+     *
+     * @param money Money
+     * @param money_change お金の増減
+     * @param reason 理由
+     */
+    public void updateMoney(Money money, Long money_change, String reason) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.merge(money);//update
+        session.getTransaction().commit();
+        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
         session.close();
     }
 

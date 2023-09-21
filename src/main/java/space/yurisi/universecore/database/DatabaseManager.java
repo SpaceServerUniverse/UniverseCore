@@ -15,8 +15,8 @@ public class DatabaseManager {
 
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
-        this.moneyRepository = new MoneyRepository(sessionFactory);
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
+        this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
     }
 
     public UserRepository getUserRepository() {

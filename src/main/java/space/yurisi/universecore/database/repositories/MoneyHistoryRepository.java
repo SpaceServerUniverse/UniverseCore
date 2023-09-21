@@ -25,13 +25,13 @@ public class MoneyHistoryRepository {
     /**
      * ユーザーとお金の変化に基づきお金履歴を作成します。
      *
-     * @param user User
+     * @param user_id Long ユーザーID
      * @param change Long ユーザーのお金の変化値
      * @param reason String 理由(255文字以下)
      * @return money_history MoneyHistory
      */
-    public MoneyHistory createMoneyHistory(User user, Long change, String reason) {
-        MoneyHistory money_history = new MoneyHistory(null, user.getId(), change, 1000L, reason, new Date(), new Date());
+    public MoneyHistory createMoneyHistory(Long user_id, Long change, String reason) {
+        MoneyHistory money_history = new MoneyHistory(null, user_id, change, 1000L, reason, new Date(), new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 
