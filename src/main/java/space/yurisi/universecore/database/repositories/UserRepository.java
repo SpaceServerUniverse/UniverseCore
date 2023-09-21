@@ -51,10 +51,10 @@ public class UserRepository {
 
     /**
      * プレイヤーをプライマリーキーから取得します。
-     * 存在しない場合はnullを返します。
      *
      * @param id Long(PrimaryKey)
      * @return User | null
+     * @exception UserNotFoundException ユーザーが存在しない
      */
     public User getUser(Long id) throws UserNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
@@ -70,10 +70,10 @@ public class UserRepository {
 
     /**
      * プレイヤーをUUIDから取得します。
-     * 存在しない場合はnullを返します。
      *
      * @param uuid UUID
      * @return User | null
+     * @exception UserNotFoundException ユーザーが存在しない
      */
     public User getUserFromUUID(UUID uuid) throws UserNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
@@ -89,7 +89,27 @@ public class UserRepository {
     }
 
     /**
-     * 指定したプライマリーキーがデータベースに存在するかを返します
+     * プレイヤーの名前から取得します。
+     *
+     * @param name String
+     * @return User | null
+     * @exception UserNotFoundException ユーザーが存在しない
+     */
+    public User getUserFromPlayerName(String name) throws UserNotFoundException {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        User data = session.createSelectionQuery("from User where name = ?1", User.class)
+                .setParameter(1, name).getSingleResultOrNull();
+        session.getTransaction().commit();
+        session.close();
+        if (data == null) {
+            throw new UserNotFoundException("ユーザーデータが存在しませんでした。 name:" + name);
+        }
+        return data;
+    }
+
+    /**
+     * 指定したプライマリーキーのユーザーがデータベースに存在するかを返します
      *
      * @param id Long(Primary key)
      * @return boolean
@@ -104,7 +124,7 @@ public class UserRepository {
     }
 
     /**
-     * 指定したUUIDがデータベースに存在するかを返します
+     * 指定したUUIDのユーザーがデータベースに存在するかを返します
      *
      * @param uuid UUID
      * @return boolean
@@ -119,14 +139,41 @@ public class UserRepository {
     }
 
     /**
+     * 指定したプレイヤー名のユーザーがデータベースに存在するかを返します
+     *
+     * @param name String
+     * @return boolean
+     */
+    public boolean existsUserFromPlayerName(String name) {
+        try {
+            getUserFromPlayerName(name);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
      * UUIDからプライマリーキーのみを返します。
-     * 存在しない場合はnullを返します。
      *
      * @param uuid UUID
      * @return Long(PrimaryKey) long
+     * @exception UserNotFoundException ユーザーが存在しない
      */
     public Long getPrimaryKeyFromUUID(UUID uuid) throws UserNotFoundException {
         User user = this.getUserFromUUID(uuid);
+        return user.getId();
+    }
+
+    /**
+     * プレイヤーの名前からプライマリーキーのみを返します。
+     *
+     * @param name String
+     * @return Long(PrimaryKey) long
+     * @exception UserNotFoundException ユーザーが存在しない
+     */
+    public Long getPrimaryKeyFromPlayerName(String name) throws UserNotFoundException {
+        User user = this.getUserFromPlayerName(name);
         return user.getId();
     }
 

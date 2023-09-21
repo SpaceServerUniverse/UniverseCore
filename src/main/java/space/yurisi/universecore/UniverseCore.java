@@ -1,10 +1,8 @@
 package space.yurisi.universecore;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import space.yurisi.universecore.command.CommandManager;
 import space.yurisi.universecore.database.DatabaseConnector;
-
 import space.yurisi.universecore.event.EventManager;
 import space.yurisi.universecore.file.Config;
 
@@ -13,7 +11,6 @@ public final class UniverseCore extends JavaPlugin {
     private DatabaseConnector connector;
     private Config config;
 
-    private UniverseCoreAPI api;
 
     @Override
     public void onEnable() {
@@ -24,7 +21,7 @@ public final class UniverseCore extends JavaPlugin {
                 getPluginConfig().getDBUserName(),
                 getPluginConfig().getDBUserPassword()
         );
-        this.api = new UniverseCoreAPI(this.connector);
+        new UniverseCoreAPI(this.connector);
         new EventManager(this);
         new CommandManager(this);
     }

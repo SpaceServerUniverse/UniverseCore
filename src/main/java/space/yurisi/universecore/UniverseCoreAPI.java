@@ -7,9 +7,9 @@ import space.yurisi.universecore.database.DatabaseManager;
 public class UniverseCoreAPI {
     private static UniverseCoreAPI api;
 
-    private DatabaseManager manager;
+    private final DatabaseManager manager;
 
-    private DatabaseConnector connector;
+    private final DatabaseConnector connector;
 
     private final SessionFactory sessionFactory;
 
@@ -20,10 +20,19 @@ public class UniverseCoreAPI {
         api = this;
     }
 
+    /**
+     * データベースマネージャーの取得
+     *
+     * @return manager データベースマネージャー
+     */
     public DatabaseManager getDatabaseManager(){
         return this.manager;
     }
 
+    /**
+     * 自身のインスタンスを取得
+     * @return api UniverseCoreAPI
+     */
     public static UniverseCoreAPI getInstance(){
         return api;
     }
