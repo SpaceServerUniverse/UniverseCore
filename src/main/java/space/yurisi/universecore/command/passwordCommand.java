@@ -23,7 +23,6 @@ public class passwordCommand implements CommandExecutor {
         }
 
         if (strings.length == 0){
-            commandSender.sendMessage(Component.text("Usage: /password <password 大文字小文字数字含む8~36文字>"));
             return false;
         }
 
@@ -37,7 +36,7 @@ public class passwordCommand implements CommandExecutor {
             user = userRepo.getUserFromUUID(player.getUniqueId());
         } catch (UserNotFoundException e){
             e.printStackTrace();
-            commandSender.sendMessage(Component.text("エラーが発生しました エラーコード:U0001"));
+            commandSender.sendMessage(Component.text("エラーが発生しました ユーザーデータが存在しません。 エラーコード:U0001"));
             return false;
         }
 

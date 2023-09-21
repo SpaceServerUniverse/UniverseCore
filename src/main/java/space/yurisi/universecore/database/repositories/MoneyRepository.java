@@ -42,10 +42,10 @@ public class MoneyRepository {
 
     /**
      * お金をプライマリーキーから取得します。
-     * 存在しない場合はnullを返します。
      *
      * @param id Long(PrimaryKey)
-     * @return Money | null
+     * @return Money
+     * @exception MoneyNotFoundException お金データが存在しない
      */
     public Money getMoney(Long id) throws MoneyNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
@@ -61,10 +61,10 @@ public class MoneyRepository {
 
     /**
      * お金をuser_idから取得します。
-     * 存在しない場合はnullを返します。
      *
      * @param user_id Long
-     * @return Money | null
+     * @return Money
+     * @exception MoneyNotFoundException お金データが存在しない
      */
     public Money getMoneyFromUserId(Long user_id) throws MoneyNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
@@ -111,10 +111,10 @@ public class MoneyRepository {
 
     /**
      * user_idからプライマリーキーのみを返します。
-     * 存在しない場合はnullを返します。
      *
      * @param user_id Long
      * @return Long(PrimaryKey) long
+     * @exception MoneyNotFoundException お金データが存在しない
      */
     public Long getPrimaryKeyFromUserId(Long user_id) throws MoneyNotFoundException {
         Money money = this.getMoneyFromUserId(user_id);

@@ -7,9 +7,9 @@ import space.yurisi.universecore.database.DatabaseManager;
 public class UniverseCoreAPI {
     private static UniverseCoreAPI api;
 
-    private DatabaseManager manager;
+    private final DatabaseManager manager;
 
-    private DatabaseConnector connector;
+    private final DatabaseConnector connector;
 
     private final SessionFactory sessionFactory;
 
