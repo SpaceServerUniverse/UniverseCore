@@ -1,0 +1,9 @@
+space.yurisi.universecore
+space.yurisi.universecore.command
+space.yurisi.universecore.database
+space.yurisi.universecore.database.models
+space.yurisi.universecore.database.repositories
+space.yurisi.universecore.event
+space.yurisi.universecore.event.player
+space.yurisi.universecore.expection
+space.yurisi.universecore.file
