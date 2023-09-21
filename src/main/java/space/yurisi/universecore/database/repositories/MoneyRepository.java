@@ -164,6 +164,21 @@ public class MoneyRepository {
      * お金モデルに基づきデータをアップデートします。
      *
      * @param money Money
+     */
+    public void updateMoney(Money money, Long money_change) {
+        String reason = "";
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.merge(money);//update
+        session.getTransaction().commit();
+        this.moneyHistoryRepository.createMoneyHistory(money.getUser_id(), money_change, reason);
+        session.close();
+    }
+
+    /**
+     * お金モデルに基づきデータをアップデートします。
+     *
+     * @param money Money
      * @param money_change お金の増減
      * @param reason 理由
      */
