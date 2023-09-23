@@ -17,7 +17,7 @@ public class Mywarp{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", unique = true, columnDefinition = "BIGINT UNSIGNED")
+    @Column(name = "user_id", columnDefinition = "BIGINT UNSIGNED")
     private Long user_id;
 
     @Column(name = "name")

@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import space.yurisi.universecore.expection.UserNotFoundException;
 
 import java.util.Date;
+import java.util.List;
 
 public class MywarpRepository{
     private final SessionFactory sessionFactory;
@@ -35,6 +36,8 @@ public class MywarpRepository{
      * @param is_private Boolean
      * @return mywarp Mywarp
      */
+
+//    mywarpの名前が被ったときの挙動をどうするかは未決定
     public Mywarp createMywarp(Player player, String warp_name, Boolean is_private){
         Location location = player.getLocation();
 
@@ -88,15 +91,15 @@ public class MywarpRepository{
      * @return Mywarp
      * @exception MywarpNotFoundException マイワープデータが存在しない
      */
-    public Mywarp getMywarpFromUserId(Long user_id) throws MywarpNotFoundException{
+    public List<Mywarp> getMywarpFromUserId(Long user_id) throws MywarpNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Mywarp data = session.createSelectionQuery("from Mywarp where user_id = ?1", Mywarp.class)
-                .setParameter(1, user_id).getSingleResultOrNull();
+        List<Mywarp> data = session.createSelectionQuery("from Mywarp where user_id = ?1", Mywarp.class)
+                .setParameter(1, user_id).getResultList();
         session.getTransaction().commit();
         session.close();
 
-        if(data == null){
+        if(data.isEmpty()){
             throw new MywarpNotFoundException("マイワープデータが見つかりません");
         }
 
