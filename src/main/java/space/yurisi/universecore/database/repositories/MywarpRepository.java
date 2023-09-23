@@ -82,7 +82,28 @@ public class MywarpRepository{
     }
 
     /**
-     * マイワープをユーザーIDから取得します。
+     * マイワープをuser_idから取得します。
+     *
+     * @param user_id Long
+     * @return Mywarp
+     * @exception MywarpNotFoundException マイワープデータが存在しない
+     */
+    public Mywarp getMywarpFromUserId(Long user_id) throws MywarpNotFoundException{
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Mywarp data = session.get(Mywarp.class, user_id);
+        session.getTransaction().commit();
+        session.close();
+
+        if(data == null){
+            throw new MywarpNotFoundException("マイワープデータが見つかりません");
+        }
+
+        return data;
+    }
+
+    /**
+     * マイワープを更新します。
      *
      * @param mywarp Mywarp
      * @return Mywarp
