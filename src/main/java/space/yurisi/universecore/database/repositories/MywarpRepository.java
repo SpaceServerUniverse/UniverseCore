@@ -91,7 +91,8 @@ public class MywarpRepository{
     public Mywarp getMywarpFromUserId(Long user_id) throws MywarpNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Mywarp data = session.get(Mywarp.class, user_id);
+        Mywarp data = session.createSelectionQuery("from Mywarp where user_id = ?1", Mywarp.class)
+                .setParameter(1, user_id).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
 
