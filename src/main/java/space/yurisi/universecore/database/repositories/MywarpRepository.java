@@ -15,11 +15,26 @@ public class MywarpRepository{
 
     private final UserRepository userRepository;
 
+
+    /**
+     * Instantiates a new Mywarp repository.
+     *
+     * @param sessionFactory session factory
+     * @param userRepository UserRepository
+     */
     public MywarpRepository(SessionFactory sessionFactory, UserRepository userRepository){
         this.sessionFactory = sessionFactory;
         this.userRepository = userRepository;
     }
 
+    /**
+     * マイワープを作成します。
+     *
+     * @param player Player
+     * @param warp_name String
+     * @param is_private Boolean
+     * @return mywarp Mywarp
+     */
     public Mywarp createMywarp(Player player, String warp_name, Boolean is_private){
         Location location = player.getLocation();
 
@@ -45,6 +60,13 @@ public class MywarpRepository{
         return mywarp;
     }
 
+    /**
+     * マイワープをプライマリーキーから取得します。
+     *
+     * @param id Long(PrimaryKey)
+     * @return Mywarp
+     * @exception MywarpNotFoundException マイワープデータが存在しない
+     */
     public Mywarp getMywarp(Long id) throws MywarpNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -59,6 +81,13 @@ public class MywarpRepository{
         return data;
     }
 
+    /**
+     * マイワープをユーザーIDから取得します。
+     *
+     * @param mywarp Mywarp
+     * @return Mywarp
+     * @exception MywarpNotFoundException マイワープデータが存在しない
+     */
     public Mywarp updateMywarp(Mywarp mywarp) throws MywarpNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -68,6 +97,12 @@ public class MywarpRepository{
         return mywarp;
     }
 
+    /**
+     * マイワープを削除します。
+     *
+     * @param mywarp Mywarp
+     * @exception MywarpNotFoundException マイワープデータが存在しない
+     */
     public void deleteMywarp(Mywarp mywarp) throws MywarpNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
