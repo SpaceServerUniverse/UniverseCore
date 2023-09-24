@@ -36,7 +36,7 @@ public class Mywarp{
     private String world_name;
 
     @Column(name = "is_private")
-    @ColumnDefault("false")
+    @ColumnDefault("true")
     private Boolean is_private;
 
     @CreationTimestamp
