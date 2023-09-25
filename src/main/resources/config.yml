@@ -1,5 +1,5 @@
 db:
-  host: "localhost"
+  host: "db"
   port: 3306
-  username: "user"
-  password: "password"
+  username: "plugin"
+  password: "/0G8xuR3j.2[0SpD"
