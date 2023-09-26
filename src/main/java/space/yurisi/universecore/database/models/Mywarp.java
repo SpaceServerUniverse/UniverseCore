@@ -9,7 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "mywarps")
+@Table(name = "mywarp")
 public class Mywarp{
 
     @Id
