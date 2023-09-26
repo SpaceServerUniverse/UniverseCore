@@ -116,7 +116,7 @@ public class MywarpRepository {
     public Mywarp updateMywarp(Mywarp mywarp) throws MywarpNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.update(mywarp);
+        session.merge(mywarp);
         session.getTransaction().commit();
         session.close();
         return mywarp;
@@ -131,7 +131,7 @@ public class MywarpRepository {
     public void deleteMywarp(Mywarp mywarp) throws MywarpNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.delete(mywarp);
+        session.remove(mywarp);
         session.getTransaction().commit();
         session.close();
     }

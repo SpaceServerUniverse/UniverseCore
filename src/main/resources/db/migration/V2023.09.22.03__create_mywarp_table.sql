@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS mywarp(
     y BIGINT NOT NULL,
     z BIGINT NOT NULL,
     world_name VARCHAR(255) NOT NULL,
-    is_public BOOLEAN NOT NULL DEFAULT FALSE,
+    is_public BOOLEAN NOT NULL DEFAULT TRUE,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL
 );
