@@ -23,13 +23,13 @@ public class Mywarp{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "warp_x")
+    @Column(name = "x")
     private Long x;
 
-    @Column(name = "warp_y")
+    @Column(name = "y")
     private Long y;
 
-    @Column(name = "warp_z")
+    @Column(name = "z")
     private Long z;
 
     @Column(name = "world_name")

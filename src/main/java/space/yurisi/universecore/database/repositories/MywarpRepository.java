@@ -41,9 +41,6 @@ public class MywarpRepository {
     public Mywarp createMywarp(Player player, String warp_name, Boolean is_private) {
         Location location = player.getLocation();
 
-        Session session = this.sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
         Long user_id = null;
         try {
             user_id = userRepository.getPrimaryKeyFromPlayerName(player.getName());
@@ -56,6 +53,8 @@ public class MywarpRepository {
         String world_name = location.getWorld().getWorldFolder().getName();
         Mywarp mywarp = new Mywarp(null, user_id, warp_name, x, y, z, world_name, is_private, new Date(), new Date());
 
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.persist(mywarp);
         session.getTransaction().commit();
         session.close();
@@ -98,7 +97,6 @@ public class MywarpRepository {
                 .setParameter(1, user_id).getResultList();
         session.getTransaction().commit();
         session.close();
-
         if (data.isEmpty()) {
             throw new MywarpNotFoundException("マイワープデータが見つかりません");
         }
