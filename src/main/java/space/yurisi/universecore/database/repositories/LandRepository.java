@@ -1,0 +1,86 @@
+package space.yurisi.universecore.database.repositories;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import space.yurisi.universecore.database.models.Land;
+import space.yurisi.universecore.database.models.User;
+import space.yurisi.universecore.expection.LandNotFoundException;
+
+import java.util.Date;
+
+
+/**
+ * The type Land repository.
+ *
+ * @author yurisi
+ * @version 1.0.0
+ */
+public class LandRepository {
+    private final SessionFactory sessionFactory;
+
+    /**
+     * Instantiates a new User repository.
+     *
+     * @param sessionFactory session factory
+     */
+    public LandRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * 土地保護データを作成します。
+     *
+     * @param user User
+     * @param start_x int
+     * @param start_z int
+     * @param end_x int
+     * @param end_z int
+     * @param world_name String
+     * @return land Land
+     */
+    public Land createLand(User user, int start_x, int start_z, int end_x, int end_z, String world_name) {
+        Long user_id = user.getId();
+        Land land = new Land(null, user_id, start_x, start_z, end_x, end_z, world_name, new Date());
+
+        Session session = this.sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        session.persist(land);//save
+        session.getTransaction().commit();
+        session.close();
+
+        return land;
+    }
+
+    /**
+     * 土地保護データを取得します
+     *
+     * @param id Long(PrimaryKey)
+     * @return Land | null
+     * @throws LandNotFoundException 土地保護データが存在しない
+     */
+    public Land getLand(Long id) throws LandNotFoundException {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Land data = session.get(Land.class, id);
+        session.getTransaction().commit();
+        session.close();
+        if (data == null) {
+            throw new LandNotFoundException("土地保護データが存在しませんでした。 ID:" + id);
+        }
+        return data;
+    }
+
+    /**
+     * 土地保護データを削除します。
+     *
+     * @param land Land
+     */
+    public void deleteLand(Land land) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.remove(land); //delete
+        session.getTransaction().commit();
+        session.close();
+    }
+}
