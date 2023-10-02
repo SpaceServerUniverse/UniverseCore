@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.database.repositories.UserRepository;
-import space.yurisi.universecore.expection.UserNotFoundException;
+import space.yurisi.universecore.exception.UserNotFoundException;
 
 import java.util.Objects;
 import java.util.UUID;
