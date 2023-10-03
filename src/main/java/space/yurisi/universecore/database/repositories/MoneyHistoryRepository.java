@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Money;
 import space.yurisi.universecore.database.models.MoneyHistory;
-import space.yurisi.universecore.expection.MoneyHistoryNotFoundException;
-import space.yurisi.universecore.expection.MoneyNotFoundException;
+import space.yurisi.universecore.exception.MoneyHistoryNotFoundException;
+import space.yurisi.universecore.exception.MoneyNotFoundException;
 
 import java.util.Date;
 import java.util.List;

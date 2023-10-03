@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import space.yurisi.universecore.UniverseCoreAPI;
 import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.database.repositories.UserRepository;
-import space.yurisi.universecore.expection.UserNotFoundException;
+import space.yurisi.universecore.exception.UserNotFoundException;
 
 import java.util.regex.Pattern;
 
