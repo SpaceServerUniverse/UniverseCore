@@ -3,7 +3,7 @@ package space.yurisi.universecore.database.repositories;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Mywarp;
-import space.yurisi.universecore.expection.MywarpNotFoundException;
+import space.yurisi.universecore.exception.MywarpNotFoundException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import space.yurisi.universecore.expection.UserNotFoundException;
