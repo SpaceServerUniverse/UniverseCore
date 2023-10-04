@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Land;
 import space.yurisi.universecore.database.models.LandPermission;
 import space.yurisi.universecore.database.models.User;
-import space.yurisi.universecore.expection.LandPermissionNotFoundException;
+import space.yurisi.universecore.exception.LandPermissionNotFoundException;
 
 import java.util.Date;
 

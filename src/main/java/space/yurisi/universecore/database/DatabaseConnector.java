@@ -50,6 +50,7 @@ public class DatabaseConnector {
                 .addAnnotatedClass(MoneyHistory.class)
                 .addAnnotatedClass(Land.class)
                 .addAnnotatedClass(LandPermission.class)
+                .addAnnotatedClass(Mywarp.class)
                 .setProperty(DRIVER, "com.mysql.cj.jdbc.Driver")
                 .setProperty(URL, jdbc + "/SpaceServerUniverse")
                 .setProperty(USER, this.user)

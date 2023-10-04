@@ -10,6 +10,7 @@ public class DatabaseManager {
     private final MoneyHistoryRepository moneyHistoryRepository;
     private final LandRepository landRepository;
     private final LandPermissionRepository landPermissionRepository;
+    private final MywarpRepository mywarpRepository;
 
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
@@ -17,10 +18,12 @@ public class DatabaseManager {
         this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
         this.landRepository = new LandRepository(sessionFactory);
         this.landPermissionRepository = new LandPermissionRepository(sessionFactory);
+        this.mywarpRepository = new MywarpRepository(sessionFactory, getUserRepository());
     }
 
     /**
      * ユーザーリポジトリを取得
+     *
      * @return UserRepository
      */
     public UserRepository getUserRepository() {
@@ -29,6 +32,7 @@ public class DatabaseManager {
 
     /**
      * お金リポジトリの取得
+     *
      * @return MoneyRepository
      */
     public MoneyRepository getMoneyRepository() {
@@ -37,6 +41,7 @@ public class DatabaseManager {
 
     /**
      * お金履歴リポジトリを取得
+     *
      * @return MoneyHistoryRepository
      */
     public MoneyHistoryRepository getMoneyHistoryRepository() {
@@ -44,7 +49,9 @@ public class DatabaseManager {
     }
 
     /**
+     *
      * 土地保護のリポジトリを取得
+     *
      * @return LandRepository
      */
     public LandRepository getLandRepository() {
@@ -53,9 +60,20 @@ public class DatabaseManager {
 
     /**
      * 土地保護の権限リポジトリを取得
+     *
      * @return LandPermissionRepository
      */
     public LandPermissionRepository getLandPermissionRepository() {
         return landPermissionRepository;
     }
+
+    /**
+     * マイワープリポジトリを取得
+     *
+     * @return MywarpRepository
+     */
+    public MywarpRepository getMywarpRepository() {
+        return mywarpRepository;
+    }
 }
+

@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'space.yurisi'
-version = '1.3'
+version = '1.4'
 description = 'UniverseCore'
 
 repositories {
@@ -35,7 +35,6 @@ dependencies {
     api "at.favre.lib:bcrypt:0.10.2"
     compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
 }
-
 
 
 def targetJavaVersion = 17
@@ -72,6 +71,4 @@ publishing {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
+compileJava.options.encoding = 'UTF-8'

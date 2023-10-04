@@ -1,4 +1,4 @@
-package space.yurisi.universecore.expection;
+package space.yurisi.universecore.exception;
 
 public class MoneyNotFoundException extends Exception{
     public MoneyNotFoundException(String message){
