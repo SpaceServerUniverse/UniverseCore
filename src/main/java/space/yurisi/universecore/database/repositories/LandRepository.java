@@ -3,10 +3,12 @@ package space.yurisi.universecore.database.repositories;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Land;
+import space.yurisi.universecore.database.models.MoneyHistory;
 import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.expection.LandNotFoundException;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -67,6 +69,18 @@ public class LandRepository {
         session.close();
         if (data == null) {
             throw new LandNotFoundException("土地保護データが存在しませんでした。 ID:" + id);
+        }
+        return data;
+    }
+
+    public List<Land> getLands() throws LandNotFoundException {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List<Land> data = session.createSelectionQuery("from Land", Land.class).getResultList();
+        session.getTransaction().commit();
+        session.close();
+        if (data == null) {
+            throw new LandNotFoundException("土地保護データが存在しませんでした。");
         }
         return data;
     }
