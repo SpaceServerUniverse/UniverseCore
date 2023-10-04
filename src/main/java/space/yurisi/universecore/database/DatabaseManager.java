@@ -1,22 +1,22 @@
 package space.yurisi.universecore.database;
 
 import org.hibernate.SessionFactory;
-import space.yurisi.universecore.database.repositories.MoneyHistoryRepository;
-import space.yurisi.universecore.database.repositories.MoneyRepository;
-import space.yurisi.universecore.database.repositories.UserRepository;
+import space.yurisi.universecore.database.repositories.*;
 
 public class DatabaseManager {
 
     private final UserRepository userRepository;
-
     private final MoneyRepository moneyRepository;
     private final MoneyHistoryRepository moneyHistoryRepository;
-
+    private final LandRepository landRepository;
+    private final LandPermissionRepository landPermissionRepository;
 
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
         this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
+        this.landRepository = new LandRepository(sessionFactory);
+        this.landPermissionRepository = new LandPermissionRepository(sessionFactory);
     }
 
     /**
@@ -41,5 +41,21 @@ public class DatabaseManager {
      */
     public MoneyHistoryRepository getMoneyHistoryRepository() {
         return moneyHistoryRepository;
+    }
+
+    /**
+     * 土地保護のリポジトリを取得
+     * @return LandRepository
+     */
+    public LandRepository getLandRepository() {
+        return landRepository;
+    }
+
+    /**
+     * 土地保護の権限リポジトリを取得
+     * @return LandPermissionRepository
+     */
+    public LandPermissionRepository getLandPermissionRepository() {
+        return landPermissionRepository;
     }
 }
