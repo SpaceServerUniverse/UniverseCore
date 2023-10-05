@@ -2,7 +2,7 @@ use SpaceServerUniverse;
 
 CREATE TABLE IF NOT EXISTS lands (
       id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-      user_id BIGINT UNSIGNED NOT NULL,
+      uuid VARCHAR(255) NOT NULL,
       start_x INT NOT NULL,
       start_z INT NOT NULL,
       end_x INT NOT NULL,
