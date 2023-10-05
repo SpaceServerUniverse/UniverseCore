@@ -1,5 +1,6 @@
 package space.yurisi.universecore.database.repositories;
 
+import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Land;
@@ -32,7 +33,7 @@ public class LandRepository {
     /**
      * 土地保護データを作成します。
      *
-     * @param user User
+     * @param player Player
      * @param start_x int
      * @param start_z int
      * @param end_x int
@@ -40,9 +41,8 @@ public class LandRepository {
      * @param world_name String
      * @return land Land
      */
-    public Land createLand(User user, int start_x, int start_z, int end_x, int end_z, String world_name) {
-        Long user_id = user.getId();
-        Land land = new Land(null, user_id, start_x, start_z, end_x, end_z, world_name, new Date());
+    public Land createLand(Player player, int start_x, int start_z, int end_x, int end_z, String world_name) {
+        Land land = new Land(null, player.getUniqueId().toString(), start_x, start_z, end_x, end_z, world_name, new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 

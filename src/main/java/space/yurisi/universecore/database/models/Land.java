@@ -13,8 +13,8 @@ public class Land {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", columnDefinition = "BIGINT UNSIGNED NOT NULL")
-    private Long user_id;
+    @Column(name = "uuid", columnDefinition = "VARCHAR(255) NOT NULL")
+    private String uuid;
 
     @Column(name = "start_x", nullable = false)
     private int start_x;
@@ -37,7 +37,7 @@ public class Land {
 
     public Land (
             Long id,
-            Long user_id,
+            String uuid,
             int start_x,
             int start_z,
             int end_x,
@@ -46,7 +46,7 @@ public class Land {
             Date created_at
     ) {
         this.id = id;
-        this.user_id = user_id;
+        this.uuid = uuid;
         this.start_x = start_x;
         this.start_z = start_z;
         this.end_x = end_x;
@@ -67,12 +67,12 @@ public class Land {
         this.id = id;
     }
 
-    public Long getUser_id () {
-        return user_id;
+    public String getUUID () {
+        return uuid;
     }
 
-    public void setUser_id (Long user_id) {
-        this.user_id = user_id;
+    public void setUser_id (String uuid) {
+        this.uuid = uuid;
     }
 
     public int getStart_x () {
