@@ -22,9 +22,9 @@ public class PlayerLevel {
     @ColumnDefault("0")
     private Long total_exp;
 
-    @Column(name = "level_mode", columnDefinition = "BIGINT UNSIGNED", nullable  = false)
+    @Column(name = "level_mode", nullable  = false)
     @ColumnDefault("0")
-    private Long level_mode;
+    private int level_mode;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable  = false)
@@ -38,7 +38,7 @@ public class PlayerLevel {
             Long id,
             Long user_id,
             Long total_exp,
-            Long level_mode,
+            int level_mode,
             Date created_at,
             Date updated_at
     ) {
@@ -79,11 +79,11 @@ public class PlayerLevel {
         this.total_exp = total_exp;
     }
 
-    public Long getLevel_mode() {
+    public int getLevel_mode() {
         return level_mode;
     }
 
-    public void setLevel_mode(Long level_mode) {
+    public void setLevel_mode(int level_mode) {
         this.level_mode = level_mode;
     }
 

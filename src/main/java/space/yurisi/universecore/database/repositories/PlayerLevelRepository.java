@@ -26,7 +26,7 @@ public class PlayerLevelRepository {
      */
     public PlayerLevel createPlayerLevel(Player player, User user) {
         PlayerLevel userLevel = new PlayerLevel(
-                null, user.getId(), 0L, 0L, new Date(), new Date()
+                null, user.getId(), 0L, 0, new Date(), new Date()
         );
 
         Session session = this.sessionFactory.getCurrentSession();

@@ -3,7 +3,6 @@ package space.yurisi.universecore.database.repositories;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import space.yurisi.universecore.database.models.PlayerLevel;
 import space.yurisi.universecore.database.models.PlayerNormalLevel;
 import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.exception.PlayerLevelNotFoundException;
