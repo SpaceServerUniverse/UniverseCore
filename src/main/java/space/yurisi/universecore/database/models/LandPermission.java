@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "land_permissions")
@@ -16,8 +17,8 @@ public class LandPermission {
     @Column(name = "land_id", columnDefinition = "BIGINT UNSIGNED NOT NULL")
     private Long land_id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long user_id;
+    @Column(name = "uuid", columnDefinition = "VARCHAR(255) NOT NULL")
+    private String uuid;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
@@ -26,12 +27,12 @@ public class LandPermission {
     public LandPermission (
             Long id,
             Long land_id,
-            Long user_id,
+            String uuid,
             Date created_at
     ) {
         this.id = id;
         this.land_id = land_id;
-        this.user_id = user_id;
+        this.uuid= uuid;
         this.created_at = created_at;
     }
 
@@ -55,12 +56,12 @@ public class LandPermission {
         this.land_id = land_id;
     }
 
-    public Long getUser_id () {
-        return user_id;
+    public String getUUID () {
+        return uuid;
     }
 
-    public void setUser_id (Long user_id) {
-        this.user_id = user_id;
+    public void setUUID (Long user_id) {
+        this.uuid = uuid;
     }
 
     public Date getCreated_at () {
