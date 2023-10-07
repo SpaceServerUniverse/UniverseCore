@@ -8,6 +8,7 @@ import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.exception.LandPermissionNotFoundException;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -24,7 +25,7 @@ public class LandPermissionRepository {
      *
      * @param sessionFactory session factory
      */
-    public LandPermissionRepository (SessionFactory sessionFactory) {
+    public LandPermissionRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -35,15 +36,15 @@ public class LandPermissionRepository {
      * @param land Land
      * @return landPermission LandPermission
      */
-    public LandPermission createLandPermission (User user, Land land) {
-        LandPermission landPermission = new LandPermission (null, land.getId (), user.getId (), new Date ());
+    public LandPermission createLandPermission(User user, Land land) {
+        LandPermission landPermission = new LandPermission(null, land.getId(), user.getId(), new Date());
 
-        Session session = this.sessionFactory.getCurrentSession ();
+        Session session = this.sessionFactory.getCurrentSession();
 
-        session.beginTransaction ();
-        session.persist (landPermission);//save
-        session.getTransaction ().commit ();
-        session.close ();
+        session.beginTransaction();
+        session.persist(landPermission);//save
+        session.getTransaction().commit();
+        session.close();
 
         return landPermission;
     }
@@ -56,17 +57,38 @@ public class LandPermissionRepository {
      * @return Land | null
      * @throws LandPermissionNotFoundException 土地保護の権限データが存在しない
      */
-    public LandPermission getLandPermission (User user, Land land) throws LandPermissionNotFoundException {
-        Session session = this.sessionFactory.getCurrentSession ();
-        session.beginTransaction ();
-        LandPermission data = session.createSelectionQuery ("from LandPermission where land_id = ?1 and user_id = ?2", LandPermission.class)
-                .setParameter (1, land.getId ())
-                .setParameter (2, user.getId ())
-                .getSingleResultOrNull ();
-        session.getTransaction ().commit ();
-        session.close ();
+    public LandPermission getLandPermission(User user, Land land) throws LandPermissionNotFoundException {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        LandPermission data = session.createSelectionQuery("from LandPermission where land_id = ?1 and user_id = ?2", LandPermission.class)
+                .setParameter(1, land.getId())
+                .setParameter(2, user.getId())
+                .getSingleResultOrNull();
+        session.getTransaction().commit();
+        session.close();
         if (data == null) {
-            throw new LandPermissionNotFoundException ("土地保護の権限データが存在しませんでした。");
+            throw new LandPermissionNotFoundException("土地保護の権限データが存在しませんでした。");
+        }
+        return data;
+    }
+
+    /**
+     * 土地保護の権限データリストを取得します
+     *
+     * @param land Land
+     * @return Land | null
+     * @throws LandPermissionNotFoundException 土地保護の権限データが存在しない
+     */
+    public List<LandPermission> getLandPermissions(Land land) throws LandPermissionNotFoundException {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List<LandPermission> data = session.createSelectionQuery("from LandPermission where land_id = ?1", LandPermission.class)
+                .setParameter(1, land.getId())
+                .getResultList();
+        session.getTransaction().commit();
+        session.close();
+        if (data == null) {
+            throw new LandPermissionNotFoundException("土地保護の権限データが存在しませんでした。");
         }
         return data;
     }
@@ -76,11 +98,11 @@ public class LandPermissionRepository {
      *
      * @param landPermission LandPermission
      */
-    public void deleteLandPermission (LandPermission landPermission) {
-        Session session = this.sessionFactory.getCurrentSession ();
-        session.beginTransaction ();
-        session.remove (landPermission); //delete
-        session.getTransaction ().commit ();
-        session.close ();
+    public void deleteLandPermission(LandPermission landPermission) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.remove(landPermission); //delete
+        session.getTransaction().commit();
+        session.close();
     }
 }
