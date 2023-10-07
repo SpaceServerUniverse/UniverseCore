@@ -1,10 +1,7 @@
 package space.yurisi.universecore.database;
 
 import org.hibernate.SessionFactory;
-import space.yurisi.universecore.database.repositories.MywarpRepository;
-import space.yurisi.universecore.database.repositories.MoneyHistoryRepository;
-import space.yurisi.universecore.database.repositories.MoneyRepository;
-import space.yurisi.universecore.database.repositories.UserRepository;
+import space.yurisi.universecore.database.repositories.*;
 
 public class DatabaseManager {
 
@@ -13,6 +10,8 @@ public class DatabaseManager {
     private final MoneyRepository moneyRepository;
     private final MoneyHistoryRepository moneyHistoryRepository;
     private final MywarpRepository mywarpRepository;
+    private final PlayerLevelRepository playerLevelRepository;
+    private final PlayerNormalLevelRepository playerNormalLevelRepository;
 
 
     public DatabaseManager(SessionFactory sessionFactory) {
@@ -20,6 +19,8 @@ public class DatabaseManager {
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
         this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
         this.mywarpRepository = new MywarpRepository(sessionFactory, getUserRepository());
+        this.playerLevelRepository = new PlayerLevelRepository(sessionFactory);
+        this.playerNormalLevelRepository = new PlayerNormalLevelRepository(sessionFactory);
     }
 
     /**
@@ -52,5 +53,13 @@ public class DatabaseManager {
      */
     public MywarpRepository getMywarpRepository(){
         return mywarpRepository;
+    }
+
+    public PlayerLevelRepository getPlayerLevelRepository() {
+        return playerLevelRepository;
+    }
+
+    public PlayerNormalLevelRepository getPlayerNormalLevelRepository() {
+        return playerNormalLevelRepository;
     }
 }
