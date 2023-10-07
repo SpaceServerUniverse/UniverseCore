@@ -5,10 +5,7 @@ import org.flywaydb.core.api.logging.LogFactory;
 import org.flywaydb.core.internal.logging.javautil.JavaUtilLogCreator;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import space.yurisi.universecore.database.models.Money;
-import space.yurisi.universecore.database.models.User;
-import space.yurisi.universecore.database.models.MoneyHistory;
-import space.yurisi.universecore.database.models.Mywarp;
+import space.yurisi.universecore.database.models.*;
 
 import static org.hibernate.cfg.AvailableSettings.*;
 
@@ -52,6 +49,8 @@ public class DatabaseConnector {
                 .addAnnotatedClass(Money.class)
                 .addAnnotatedClass(MoneyHistory.class)
                 .addAnnotatedClass(Mywarp.class)
+                .addAnnotatedClass(PlayerLevel.class)
+                .addAnnotatedClass(PlayerNormalLevel.class)
                 .setProperty(DRIVER, "com.mysql.cj.jdbc.Driver")
                 .setProperty(URL, jdbc + "/SpaceServerUniverse")
                 .setProperty(USER, this.user)
