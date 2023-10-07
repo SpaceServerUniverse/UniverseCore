@@ -37,7 +37,7 @@ public class LandPermissionRepository {
      * @return landPermission LandPermission
      */
     public LandPermission createLandPermission(User user, Land land) {
-        LandPermission landPermission = new LandPermission(null, land.getId(), user.getId(), new Date());
+        LandPermission landPermission = new LandPermission(null, land.getId(), user.getUuid(), new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 

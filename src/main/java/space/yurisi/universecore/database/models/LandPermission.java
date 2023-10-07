@@ -44,32 +44,16 @@ public class LandPermission {
         return id;
     }
 
-    public void setId (Long id) {
-        this.id = id;
-    }
-
     public Long getLand_id() {
         return land_id;
     }
 
-    public void setLand_id(Long land_id) {
-        this.land_id = land_id;
-    }
-
-    public String getUUID () {
+    public String getUuid () {
         return uuid;
-    }
-
-    public void setUUID (Long user_id) {
-        this.uuid = uuid;
     }
 
     public Date getCreated_at () {
         return created_at;
-    }
-
-    public void setCreated_at (Date created_at) {
-        this.created_at = created_at;
     }
 
     @PrePersist

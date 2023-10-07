@@ -59,68 +59,36 @@ public class Land {
 
     }
 
-    public Long getId () {
+    public Long getId() {
         return id;
     }
 
-    public void setId (Long id) {
-        this.id = id;
-    }
-
-    public String getUUID () {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUser_id (String uuid) {
-        this.uuid = uuid;
-    }
-
-    public int getStart_x () {
+    public int getStart_x() {
         return start_x;
     }
 
-    public void setStart_x (int start_x) {
-        this.start_x = start_x;
-    }
-
-    public int getStart_z () {
+    public int getStart_z() {
         return start_z;
     }
 
-    public void setStart_z (int start_z) {
-        this.start_z = start_z;
-    }
-
-    public int getEnd_x () {
+    public int getEnd_x() {
         return end_x;
     }
 
-    public void setEnd_x (int end_x) {
-        this.end_x = end_x;
-    }
-
-    public int getEnd_z () {
+    public int getEnd_z() {
         return end_z;
     }
 
-    public void setEnd_z (int end_z) {
-        this.end_z = end_z;
-    }
-
-    public String getWorld_name () {
+    public String getWorld_name() {
         return world_name;
     }
 
-    public void setWorld_name (String world_name) {
-        this.world_name = world_name;
-    }
-
-    public Date getCreated_at () {
+    public Date getCreated_at() {
         return created_at;
-    }
-
-    public void setCreated_at (Date created_at) {
-        this.created_at = created_at;
     }
 
     @PrePersist
