@@ -68,7 +68,7 @@ public class PlayerLevelRepository {
     public PlayerLevel getPlayerLevelFromUser(User user) throws  PlayerLevelNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        PlayerLevel data = session.createSelectionQuery("from PlayerLevel where  = ?1", PlayerLevel.class)
+        PlayerLevel data = session.createSelectionQuery("from PlayerLevel where user_id = ?1", PlayerLevel.class)
                 .setParameter(1, user.getId()).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
