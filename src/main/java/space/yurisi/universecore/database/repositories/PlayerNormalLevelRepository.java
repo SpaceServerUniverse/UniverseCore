@@ -75,7 +75,7 @@ public class PlayerNormalLevelRepository {
     public PlayerNormalLevel getPlayerNormalLevelFromUser(User user) throws PlayerNormalLevelNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        PlayerNormalLevel data = session.createSelectionQuery("from PlayerLevel where user_id = ?1", PlayerNormalLevel.class)
+        PlayerNormalLevel data = session.createSelectionQuery("from PlayerNormalLevel where user_id = ?1", PlayerNormalLevel.class)
                 .setParameter(1, user.getId()).getSingleResultOrNull();
         session.getTransaction().commit();
         session.close();
