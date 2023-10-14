@@ -11,6 +11,8 @@ public class DatabaseManager {
     private final LandRepository landRepository;
     private final LandPermissionRepository landPermissionRepository;
     private final MywarpRepository mywarpRepository;
+    private final PlayerLevelRepository playerLevelRepository;
+    private final PlayerNormalLevelRepository playerNormalLevelRepository;
 
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
@@ -19,6 +21,8 @@ public class DatabaseManager {
         this.landRepository = new LandRepository(sessionFactory);
         this.landPermissionRepository = new LandPermissionRepository(sessionFactory);
         this.mywarpRepository = new MywarpRepository(sessionFactory, getUserRepository());
+        this.playerLevelRepository = new PlayerLevelRepository(sessionFactory);
+        this.playerNormalLevelRepository = new PlayerNormalLevelRepository(sessionFactory);
     }
 
     /**
@@ -75,5 +79,12 @@ public class DatabaseManager {
     public MywarpRepository getMywarpRepository() {
         return mywarpRepository;
     }
-}
+  
+    public PlayerLevelRepository getPlayerLevelRepository() {
+        return playerLevelRepository;
+    }
 
+    public PlayerNormalLevelRepository getPlayerNormalLevelRepository() {
+        return playerNormalLevelRepository;
+    }
+}
