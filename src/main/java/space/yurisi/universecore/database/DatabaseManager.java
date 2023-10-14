@@ -79,11 +79,21 @@ public class DatabaseManager {
     public MywarpRepository getMywarpRepository() {
         return mywarpRepository;
     }
-  
+
+    /**
+     * プレイヤーレベルリポジトリを取得
+     *
+     * @return PlayerLevelRepository
+     */
     public PlayerLevelRepository getPlayerLevelRepository() {
         return playerLevelRepository;
     }
 
+    /**
+     * プレイヤーノーマルレベルリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
     public PlayerNormalLevelRepository getPlayerNormalLevelRepository() {
         return playerNormalLevelRepository;
     }
