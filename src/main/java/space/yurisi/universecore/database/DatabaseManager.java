@@ -6,18 +6,20 @@ import space.yurisi.universecore.database.repositories.*;
 public class DatabaseManager {
 
     private final UserRepository userRepository;
-
     private final MoneyRepository moneyRepository;
     private final MoneyHistoryRepository moneyHistoryRepository;
+    private final LandRepository landRepository;
+    private final LandPermissionRepository landPermissionRepository;
     private final MywarpRepository mywarpRepository;
     private final PlayerLevelRepository playerLevelRepository;
     private final PlayerNormalLevelRepository playerNormalLevelRepository;
-
 
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
         this.moneyRepository = new MoneyRepository(sessionFactory, getMoneyHistoryRepository());
+        this.landRepository = new LandRepository(sessionFactory);
+        this.landPermissionRepository = new LandPermissionRepository(sessionFactory);
         this.mywarpRepository = new MywarpRepository(sessionFactory, getUserRepository());
         this.playerLevelRepository = new PlayerLevelRepository(sessionFactory);
         this.playerNormalLevelRepository = new PlayerNormalLevelRepository(sessionFactory);
@@ -25,6 +27,7 @@ public class DatabaseManager {
 
     /**
      * ユーザーリポジトリを取得
+     *
      * @return UserRepository
      */
     public UserRepository getUserRepository() {
@@ -33,6 +36,7 @@ public class DatabaseManager {
 
     /**
      * お金リポジトリの取得
+     *
      * @return MoneyRepository
      */
     public MoneyRepository getMoneyRepository() {
@@ -41,6 +45,7 @@ public class DatabaseManager {
 
     /**
      * お金履歴リポジトリを取得
+     *
      * @return MoneyHistoryRepository
      */
     public MoneyHistoryRepository getMoneyHistoryRepository() {
@@ -48,13 +53,33 @@ public class DatabaseManager {
     }
 
     /**
-     * マイワープリポジトリを取得
-     * @return MywarpRepository
+     *
+     * 土地保護のリポジトリを取得
+     *
+     * @return LandRepository
      */
-    public MywarpRepository getMywarpRepository(){
-        return mywarpRepository;
+    public LandRepository getLandRepository() {
+        return landRepository;
     }
 
+    /**
+     * 土地保護の権限リポジトリを取得
+     *
+     * @return LandPermissionRepository
+     */
+    public LandPermissionRepository getLandPermissionRepository() {
+        return landPermissionRepository;
+    }
+
+    /**
+     * マイワープリポジトリを取得
+     *
+     * @return MywarpRepository
+     */
+    public MywarpRepository getMywarpRepository() {
+        return mywarpRepository;
+    }
+  
     public PlayerLevelRepository getPlayerLevelRepository() {
         return playerLevelRepository;
     }

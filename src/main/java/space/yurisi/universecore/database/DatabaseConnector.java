@@ -48,6 +48,8 @@ public class DatabaseConnector {
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Money.class)
                 .addAnnotatedClass(MoneyHistory.class)
+                .addAnnotatedClass(Land.class)
+                .addAnnotatedClass(LandPermission.class)
                 .addAnnotatedClass(Mywarp.class)
                 .addAnnotatedClass(PlayerLevel.class)
                 .addAnnotatedClass(PlayerNormalLevel.class)
