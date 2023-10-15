@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS lands (
       end_x INT NOT NULL,
       end_z INT NOT NULL,
       world_name VARCHAR(255) NOT NULL,
+      price BIGINT UNSIGNED NOT NULL,
       created_at DATETIME NOT NULL
 );
 

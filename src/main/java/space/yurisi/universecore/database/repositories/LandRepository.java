@@ -41,8 +41,8 @@ public class LandRepository {
      * @param world_name String
      * @return land Land
      */
-    public Land createLand(Player player, int start_x, int start_z, int end_x, int end_z, String world_name) {
-        Land land = new Land(null, player.getUniqueId().toString(), start_x, start_z, end_x, end_z, world_name, new Date());
+    public Land createLand(Player player, int start_x, int start_z, int end_x, int end_z, String world_name, Long price) {
+        Land land = new Land(null, player.getUniqueId().toString(), start_x, start_z, end_x, end_z, world_name, price, new Date());
 
         Session session = this.sessionFactory.getCurrentSession();
 

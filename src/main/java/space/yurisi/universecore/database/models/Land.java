@@ -31,6 +31,9 @@ public class Land {
     @Column(name = "world_name", columnDefinition = "VARCHAR(255) NOT NULL")
     private String world_name;
 
+    @Column(name = "price", columnDefinition = "BIGINT UNSIGNED")
+    private Long price;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private Date created_at;
@@ -43,6 +46,7 @@ public class Land {
             int end_x,
             int end_z,
             String world_name,
+            Long price,
             Date created_at
     ) {
         this.id = id;
@@ -52,6 +56,7 @@ public class Land {
         this.end_x = end_x;
         this.end_z = end_z;
         this.world_name = world_name;
+        this.price = price;
         this.created_at = created_at;
     }
 
@@ -85,6 +90,10 @@ public class Land {
 
     public String getWorld_name() {
         return world_name;
+    }
+
+    public Long getPrice() {
+        return price;
     }
 
     public Date getCreated_at() {
