@@ -7,3 +7,4 @@ space.yurisi.universecore.event
 space.yurisi.universecore.event.player
 space.yurisi.universecore.exception
 space.yurisi.universecore.file
+space.yurisi.universecore.log.filter
