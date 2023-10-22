@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "land_permissions")

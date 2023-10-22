@@ -10,7 +10,7 @@ public class EventManager {
         init(main);
     }
 
-    private void init(UniverseCore main){
+    private void init(UniverseCore main) {
         Bukkit.getPluginManager().registerEvents(new LoginEvent(UniverseCoreAPI.getInstance().getDatabaseManager().getUserRepository()), main);
     }
 }
