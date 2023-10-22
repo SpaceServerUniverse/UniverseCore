@@ -4,8 +4,6 @@ import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.models.Land;
-import space.yurisi.universecore.database.models.MoneyHistory;
-import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.exception.LandNotFoundException;
 
 import java.util.Date;
