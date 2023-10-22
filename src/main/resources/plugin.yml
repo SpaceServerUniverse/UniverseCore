@@ -6,3 +6,7 @@ commands:
   password:
     description: パスワードを設定します
     usage: /password <password 大文字小文字数字含む8~36文字>
+
+  pplayer:
+    description: 貴方の役職を確認します
+    usage: /pplayer
