@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'space.yurisi'
-version = '1.6.3'
+version = '1.7'
 description = 'UniverseCore'
 
 repositories {
