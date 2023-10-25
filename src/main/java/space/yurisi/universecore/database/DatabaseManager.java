@@ -14,6 +14,10 @@ public class DatabaseManager {
     private final PlayerLevelRepository playerLevelRepository;
     private final PlayerNormalLevelRepository playerNormalLevelRepository;
 
+    private final PositionRepository positionRepository;
+
+    private final UserPositionRepository userPositionRepository;
+
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
@@ -23,6 +27,8 @@ public class DatabaseManager {
         this.mywarpRepository = new MywarpRepository(sessionFactory, getUserRepository());
         this.playerLevelRepository = new PlayerLevelRepository(sessionFactory);
         this.playerNormalLevelRepository = new PlayerNormalLevelRepository(sessionFactory);
+        this.positionRepository = new PositionRepository(sessionFactory);
+        this.userPositionRepository = new UserPositionRepository(sessionFactory);
     }
 
     /**
@@ -96,5 +102,23 @@ public class DatabaseManager {
      */
     public PlayerNormalLevelRepository getPlayerNormalLevelRepository() {
         return playerNormalLevelRepository;
+    }
+
+    /**
+     * 役職リポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public PositionRepository getPositionRepository() {
+        return positionRepository;
+    }
+
+    /**
+     * プレイヤー役職リポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public UserPositionRepository getUserPositionRepository() {
+        return userPositionRepository;
     }
 }

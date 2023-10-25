@@ -13,5 +13,6 @@ public class CommandManager {
 
     private void init(){
         main.getCommand("password").setExecutor(new passwordCommand());
+        main.getCommand("pplayer").setExecutor(new pplayerCommand());
     }
 }

@@ -53,6 +53,8 @@ public class DatabaseConnector {
                 .addAnnotatedClass(Mywarp.class)
                 .addAnnotatedClass(PlayerLevel.class)
                 .addAnnotatedClass(PlayerNormalLevel.class)
+                .addAnnotatedClass(Position.class)
+                .addAnnotatedClass(UserPosition.class)
                 .setProperty(DRIVER, "com.mysql.cj.jdbc.Driver")
                 .setProperty(URL, jdbc + "/SpaceServerUniverse")
                 .setProperty(USER, this.user)
