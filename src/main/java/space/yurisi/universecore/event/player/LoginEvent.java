@@ -10,6 +10,7 @@ import space.yurisi.universecore.database.models.User;
 import space.yurisi.universecore.database.repositories.UserRepository;
 import space.yurisi.universecore.exception.UserNotFoundException;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -41,7 +42,9 @@ public class LoginEvent implements Listener {
 
         if(!Objects.equals(user.getName(), name)){
             user.setName(name);
-            this.userRepository.updateUser(user);
         }
+
+        user.setUpdated_at(new Date());
+        this.userRepository.updateUser(user);
     }
 }
