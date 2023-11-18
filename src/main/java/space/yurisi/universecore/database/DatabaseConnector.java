@@ -14,16 +14,12 @@ import static org.hibernate.cfg.AvailableSettings.*;
 public class DatabaseConnector {
 
     private String jdbc;
-    private String host;
-    private int port;
     private String user;
     private String password;
 
     private SessionFactory sessionFactory;
 
     public DatabaseConnector(String host, int port, String user, String password) {
-        this.host = host;
-        this.port = port;
         this.user = user;
         this.password = password;
         this.jdbc = "jdbc:mysql://" + host + ":" + port;
