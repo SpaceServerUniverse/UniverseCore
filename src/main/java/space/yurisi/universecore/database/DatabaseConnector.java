@@ -3,9 +3,11 @@ package space.yurisi.universecore.database;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.logging.LogFactory;
 import org.flywaydb.core.internal.logging.javautil.JavaUtilLogCreator;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import space.yurisi.universecore.database.models.*;
+import space.yurisi.universecore.database.models.count.*;
 
 import static org.hibernate.cfg.AvailableSettings.*;
 
@@ -44,8 +46,14 @@ public class DatabaseConnector {
     }
 
     private SessionFactory buildSessionFactory() {
-        return new Configuration()
-                .addAnnotatedClass(User.class)
+        Configuration config = new Configuration();
+        config = registerAnnotatedClasses(config);
+        config = registerProperties(config);
+        return config.buildSessionFactory();
+    }
+
+    private Configuration registerAnnotatedClasses(Configuration configuration) {
+        return configuration.addAnnotatedClass(User.class)
                 .addAnnotatedClass(Money.class)
                 .addAnnotatedClass(MoneyHistory.class)
                 .addAnnotatedClass(Land.class)
@@ -55,7 +63,15 @@ public class DatabaseConnector {
                 .addAnnotatedClass(PlayerNormalLevel.class)
                 .addAnnotatedClass(Position.class)
                 .addAnnotatedClass(UserPosition.class)
-                .setProperty(DRIVER, "com.mysql.cj.jdbc.Driver")
+                .addAnnotatedClass(Count.class)
+                .addAnnotatedClass(KillDeathCount.class)
+                .addAnnotatedClass(LifeCount.class)
+                .addAnnotatedClass(OreCount.class)
+                .addAnnotatedClass(PlayerCount.class);
+    }
+
+    private Configuration registerProperties(Configuration configuration) {
+        return configuration.setProperty(DRIVER, "com.mysql.cj.jdbc.Driver")
                 .setProperty(URL, jdbc + "/SpaceServerUniverse")
                 .setProperty(USER, this.user)
                 .setProperty(PASS, this.password)
@@ -64,8 +80,7 @@ public class DatabaseConnector {
                 .setProperty(FORMAT_SQL, "false")
                 .setProperty(JDBC_TIME_ZONE, "Asia/Tokyo")
                 .setProperty("hibernate.current_session_context_class", "thread")
-                .setProperty("hibernate.hbm2ddl.auto", "none")
-                .buildSessionFactory();
+                .setProperty("hibernate.hbm2ddl.auto", "none");
     }
 
     public SessionFactory getSessionFactory() {

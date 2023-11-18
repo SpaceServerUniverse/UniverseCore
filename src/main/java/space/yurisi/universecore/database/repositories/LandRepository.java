@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * The type Land repository.
  *
- * @author yurisi
+ * @author charindo
  * @version 1.0.0
  */
 public class LandRepository {
