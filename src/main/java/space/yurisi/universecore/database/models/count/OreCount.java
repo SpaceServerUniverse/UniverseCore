@@ -35,6 +35,9 @@ public class OreCount {
     @Column(name = "diamond_ore", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private Long diamond_ore;
 
+    @Column(name = "copper_ore", columnDefinition = "BIGINT UNSIGNED", nullable = false)
+    private Long copper_ore;
+
     public OreCount(Long id, Long count_id, Long coal_ore, Long iron_ore, Long gold_ore, Long lapis_ore, Long redstone_ore, Long emerald_ore, Long diamond_ore) {
         this.id = id;
         this.count_id = count_id;
@@ -120,5 +123,13 @@ public class OreCount {
 
     public void setDiamond_ore(Long diamond_ore) {
         this.diamond_ore = diamond_ore;
+    }
+
+    public Long getCopper_ore(){
+        return copper_ore;
+    }
+
+    public void setCopper_ore(Long copper_ore){
+        this.copper_ore = copper_ore;
     }
 }

@@ -29,7 +29,7 @@ public class CountRepository {
         return count;
     }
 
-    public Count getCount(User user) throws CountNotFoundException {
+    public Count getCountFromUser(User user) throws CountNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
         Count data = session.createSelectionQuery("from Count where user_id = ?1", Count.class)
@@ -51,9 +51,9 @@ public class CountRepository {
         session.close();
     }
 
-    public boolean existsCount(User user){
+    public boolean existsCountFromUser(User user){
         try{
-            getCount(user);
+            getCountFromUser(user);
             return true;
         }catch(CountNotFoundException exception){
             return false;
