@@ -30,7 +30,7 @@ public class LifeCountRepository {
     public LifeCount getLifeCount(Count count) throws LifeCountNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        LifeCount data = session.createSelectionQuery("from LifeCount where user_id = ?1", LifeCount.class)
+        LifeCount data = session.createSelectionQuery("from LifeCount where count_id = ?1", LifeCount.class)
                 .setParameter(1, count.getId())
                 .getSingleResultOrNull();
         session.getTransaction().commit();

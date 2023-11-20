@@ -38,7 +38,7 @@ public class OreCount {
     @Column(name = "copper_ore", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private Long copper_ore;
 
-    public OreCount(Long id, Long count_id, Long coal_ore, Long iron_ore, Long gold_ore, Long lapis_ore, Long redstone_ore, Long emerald_ore, Long diamond_ore) {
+    public OreCount(Long id, Long count_id, Long coal_ore, Long iron_ore, Long gold_ore, Long lapis_ore, Long redstone_ore, Long emerald_ore, Long diamond_ore, Long copper_ore) {
         this.id = id;
         this.count_id = count_id;
         this.coal_ore = coal_ore;
@@ -48,6 +48,7 @@ public class OreCount {
         this.redstone_ore = redstone_ore;
         this.emerald_ore = emerald_ore;
         this.diamond_ore = diamond_ore;
+        this.copper_ore = copper_ore;
     }
 
     public OreCount() {

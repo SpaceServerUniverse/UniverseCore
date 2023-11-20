@@ -30,7 +30,7 @@ public class KillDeathCountRepository {
     public KillDeathCount getKillDeathCount(Count count) throws KillDeathCountNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        KillDeathCount data = session.createSelectionQuery("from KillDeathCount where user_id = ?1", KillDeathCount.class)
+        KillDeathCount data = session.createSelectionQuery("from KillDeathCount where count_id = ?1", KillDeathCount.class)
                 .setParameter(1, count.getId())
                 .getSingleResultOrNull();
         session.getTransaction().commit();

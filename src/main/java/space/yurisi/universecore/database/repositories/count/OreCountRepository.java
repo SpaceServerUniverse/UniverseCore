@@ -14,7 +14,7 @@ public class OreCountRepository {
     }
 
     public OreCount createOreCount(Count count) {
-        OreCount oreCount = new OreCount(null, count.getId(), 0L, 0L, 0L, 0L, 0L,0L,0L);
+        OreCount oreCount = new OreCount(null, count.getId(), 0L, 0L, 0L, 0L, 0L,0L,0L,0L);
 
         Session session = this.sessionFactory.getCurrentSession();
 
@@ -29,7 +29,7 @@ public class OreCountRepository {
     public OreCount getOreCount(Count count) throws OreCountNotFoundException {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        OreCount data = session.createSelectionQuery("from OreCount where user_id = ?1", OreCount.class)
+        OreCount data = session.createSelectionQuery("from OreCount where count_id = ?1", OreCount.class)
                 .setParameter(1, count.getId())
                 .getSingleResultOrNull();
         session.getTransaction().commit();

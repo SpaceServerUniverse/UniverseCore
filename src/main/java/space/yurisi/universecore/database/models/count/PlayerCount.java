@@ -2,6 +2,7 @@ package space.yurisi.universecore.database.models.count;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -23,9 +24,9 @@ public class PlayerCount {
     private Long consecutive_login;
 
     @Column(name = "last_login_date", nullable = false)
-    private Date last_login_date;
+    private String last_login_date;
 
-    public PlayerCount(Long id, Long count_id, Long login, Long consecutive_login, Date last_login_date) {
+    public PlayerCount(Long id, Long count_id, Long login, Long consecutive_login, String last_login_date) {
         this.id = id;
         this.count_id = count_id;
         this.login = login;
@@ -68,11 +69,11 @@ public class PlayerCount {
         this.consecutive_login = consecutive_login;
     }
 
-    public Date getLast_login_date() {
+    public String getLast_login_date() {
         return last_login_date;
     }
 
-    public void setLast_login_date(Date last_login_date) {
+    public void setLast_login_date(String last_login_date) {
         this.last_login_date = last_login_date;
     }
 }

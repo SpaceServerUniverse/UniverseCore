@@ -6,6 +6,7 @@ import space.yurisi.universecore.database.models.count.Count;
 import space.yurisi.universecore.database.models.count.PlayerCount;
 import space.yurisi.universecore.exception.PlayerCountNotFoundException;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PlayerCountRepository {
@@ -16,7 +17,9 @@ public class PlayerCountRepository {
     }
 
     public PlayerCount createPlayerCount(Count count) {
-        PlayerCount playerCount = new PlayerCount(null, count.getId(),1L,1L,new Date());
+        Date today = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        PlayerCount playerCount = new PlayerCount(null, count.getId(),1L,1L, simpleDateFormat.format(today));
 
         Session session = this.sessionFactory.getCurrentSession();
 
@@ -31,7 +34,7 @@ public class PlayerCountRepository {
     public PlayerCount getPlayerCount(Count count) throws PlayerCountNotFoundException{
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        PlayerCount data = session.createSelectionQuery("from PlayerCount where user_id = ?1", PlayerCount.class)
+        PlayerCount data = session.createSelectionQuery("from PlayerCount where count_id = ?1", PlayerCount.class)
                 .setParameter(1, count.getId())
                 .getSingleResultOrNull();
         session.getTransaction().commit();
