@@ -2,6 +2,7 @@ package space.yurisi.universecore.database;
 
 import org.hibernate.SessionFactory;
 import space.yurisi.universecore.database.repositories.*;
+import space.yurisi.universecore.database.repositories.count.*;
 
 public class DatabaseManager {
 
@@ -18,6 +19,16 @@ public class DatabaseManager {
 
     private final UserPositionRepository userPositionRepository;
 
+    private final CountRepository countRepository;
+
+    private final KillDeathCountRepository killDeathCountRepository;
+
+    private final LifeCountRepository lifeCountRepository;
+
+    private final OreCountRepository oreCountRepository;
+
+    private final PlayerCountRepository playerCountRepository;
+
     public DatabaseManager(SessionFactory sessionFactory) {
         this.userRepository = new UserRepository(sessionFactory);
         this.moneyHistoryRepository = new MoneyHistoryRepository(sessionFactory);
@@ -29,6 +40,11 @@ public class DatabaseManager {
         this.playerNormalLevelRepository = new PlayerNormalLevelRepository(sessionFactory);
         this.positionRepository = new PositionRepository(sessionFactory);
         this.userPositionRepository = new UserPositionRepository(sessionFactory);
+        this.countRepository = new CountRepository(sessionFactory);
+        this.killDeathCountRepository = new KillDeathCountRepository(sessionFactory);
+        this.lifeCountRepository = new LifeCountRepository(sessionFactory);
+        this.oreCountRepository = new OreCountRepository(sessionFactory);
+        this.playerCountRepository = new PlayerCountRepository(sessionFactory);
     }
 
     /**
@@ -59,7 +75,6 @@ public class DatabaseManager {
     }
 
     /**
-     *
      * 土地保護のリポジトリを取得
      *
      * @return LandRepository
@@ -120,5 +135,50 @@ public class DatabaseManager {
      */
     public UserPositionRepository getUserPositionRepository() {
         return userPositionRepository;
+    }
+
+    /**
+     * カウントリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public CountRepository getCountRepository() {
+        return countRepository;
+    }
+
+    /**
+     * キルデスカウントリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public KillDeathCountRepository getKillDeathCountRepository() {
+        return killDeathCountRepository;
+    }
+
+    /**
+     * 生活カウントリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public LifeCountRepository getLifeCountRepository() {
+        return lifeCountRepository;
+    }
+
+    /**
+     * 鉱石カウントリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public OreCountRepository getOreCountRepository() {
+        return oreCountRepository;
+    }
+
+    /**
+     * プレイヤーカウントリポジトリを取得
+     *
+     * @return PlayerNormalLevelRepository
+     */
+    public PlayerCountRepository getPlayerCountRepository() {
+        return playerCountRepository;
     }
 }
